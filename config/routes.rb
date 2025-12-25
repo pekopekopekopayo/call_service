@@ -12,7 +12,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "sessions#new"
 
+  mount ActionCable.server => "/cable"
+
   resources :users, only: %i[index show new create]
+  resources :calls, only: %i[show]
 
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"
