@@ -1,0 +1,41 @@
+<h1>회원가입</h1>
+
+<% if @user.errors.any? %>
+  <div style="margin-bottom: 12px; padding: 10px 12px; border-radius: 8px; background: #fef2f2; border: 1px solid #fecaca;">
+    <strong>에러</strong>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: @user do |f| %>
+  <div style="display: grid; gap: 10px; max-width: 360px;">
+    <div>
+      <%= f.label :email, "이메일" %><br>
+      <%= f.email_field :email, required: true, autocomplete: "email", style: "width: 100%;" %>
+    </div>
+
+    <div>
+      <%= f.label :name, "이름" %><br>
+      <%= f.text_field :name, required: true, autocomplete: "name", style: "width: 100%;" %>
+    </div>
+
+    <div>
+      <%= f.label :password, "비밀번호" %><br>
+      <%= f.password_field :password, required: true, autocomplete: "new-password", style: "width: 100%;" %>
+    </div>
+
+    <div>
+      <%= f.label :password_confirmation, "비밀번호 확인" %><br>
+      <%= f.password_field :password_confirmation, required: true, autocomplete: "new-password", style: "width: 100%;" %>
+    </div>
+
+    <div style="display:flex; gap: 10px; align-items:center;">
+      <%= f.submit "가입" %>
+      <%= link_to "로그인", login_path %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,17 @@
+<h1>유저 목록</h1>
+
+<p style="margin-top: 0;">
+  총 <%= @users.size %>명
+  <% if logged_in? %>
+    / 내 계정: <%= link_to current_user.name, user_path(current_user) %>
+  <% end %>
+</p>
+
+<ul>
+  <% @users.each do |user| %>
+    <li>
+      <%= link_to user.name, user_path(user) %>
+      - <%= user.email %>
+    </li>
+  <% end %>
+</ul>

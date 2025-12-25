@@ -24,6 +24,30 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header style="padding: 12px 16px; border-bottom: 1px solid #eee;">
+      <nav style="display: flex; gap: 12px; align-items: center;">
+        <%= link_to "Users", users_path %>
+
+        <span style="margin-left: auto;"></span>
+
+        <% if logged_in? %>
+          <span><%= current_user.name %>(<%= current_user.email %>)</span>
+          <%= button_to "Logout", logout_path, method: :delete, form: { style: "display:inline;" } %>
+        <% else %>
+          <%= link_to "Login", login_path %>
+          <%= link_to "Sign up", new_user_path %>
+        <% end %>
+      </nav>
+    </header>
+
+    <main style="padding: 16px;">
+      <% flash.each do |type, message| %>
+        <div style="margin-bottom: 12px; padding: 10px 12px; border-radius: 8px; background: <%= type.to_s == "notice" ? "#ecfdf5" : "#fef2f2" %>; border: 1px solid <%= type.to_s == "notice" ? "#a7f3d0" : "#fecaca" %>;">
+          <%= message %>
+        </div>
+      <% end %>
+
+      <%= yield %>
+    </main>
   </body>
 </html>
