@@ -12,6 +12,9 @@
     <li>
       <%= link_to user.name, user_path(user) %>
       - <%= user.email %>
+      <% if logged_in? && current_user.id != user.id %>
+        - <%= link_to "전화", call_path(user) %>
+      <% end %>
     </li>
   <% end %>
 </ul>

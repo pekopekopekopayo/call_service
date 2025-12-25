@@ -40,6 +40,13 @@
       </nav>
     </header>
 
+    <% if logged_in? %>
+      <div
+        data-controller="call-client"
+        data-call-client-current-user-id-value="<%= current_user.id %>"
+      ></div>
+    <% end %>
+
     <main style="padding: 16px;">
       <% flash.each do |type, message| %>
         <div style="margin-bottom: 12px; padding: 10px 12px; border-radius: 8px; background: <%= type.to_s == "notice" ? "#ecfdf5" : "#fef2f2" %>; border: 1px solid <%= type.to_s == "notice" ? "#a7f3d0" : "#fecaca" %>;">

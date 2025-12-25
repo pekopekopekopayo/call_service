@@ -4,6 +4,12 @@
 <p><strong>이메일:</strong> <%= @user.email %></p>
 <p><strong>이름:</strong> <%= @user.name %></p>
 
+<% if logged_in? && current_user.id != @user.id %>
+  <p>
+    <%= link_to "이 유저에게 전화하기", call_path(@user) %>
+  </p>
+<% end %>
+
 <p>
   <%= link_to "목록", users_path %>
 </p>

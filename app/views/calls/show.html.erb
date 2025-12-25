@@ -1,0 +1,34 @@
+<h1>통화</h1>
+
+<p style="margin-top: 0;">
+  상대: <strong><%= @peer.name %></strong> (<%= @peer.email %>)
+</p>
+
+<div
+  data-controller="call-room"
+  data-call-room-current-user-id-value="<%= current_user.id %>"
+  data-call-room-peer-user-id-value="<%= @peer.id %>"
+  data-call-room-turn-url-value="<%= ENV.fetch("TURN_URL", "turn:localhost:3478") %>"
+  data-call-room-turn-username-value="<%= ENV.fetch("TURN_USERNAME", "turnuser") %>"
+  data-call-room-turn-credential-value="<%= ENV.fetch("TURN_CREDENTIAL", "turnpass") %>"
+>
+  <p data-call-room-target="status" style="color: #555; margin: 8px 0;">
+    준비 중...
+  </p>
+
+  <div style="display: flex; gap: 8px; margin-top: 12px;">
+    <button type="button" data-action="call-room#requestPermission">
+      마이크 권한 요청
+    </button>
+    <button type="button" data-action="call-room#start">
+      전화 걸기/받기
+    </button>
+    <button type="button" data-action="call-room#hangup">
+      끊기
+    </button>
+    <%= link_to "유저 목록", users_path, style: "margin-left:auto;" %>
+  </div>
+
+  <audio data-call-room-target="localAudio" autoplay muted></audio>
+  <audio data-call-room-target="remoteAudio" autoplay></audio>
+</div>
